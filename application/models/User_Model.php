@@ -1,14 +1,13 @@
 <?php
 class User_Model extends CI_Model 
 {
-	// create user 
-      
+	// create user   
 	function insertUser($data)
 	{
     $this->db->insert('users', $data);
 	}
-	// user login 
 
+	// user login 
 	function loginUser($userMail,$userPass)
 	{
 	$this->db->where('userMail', $userMail);
@@ -22,7 +21,7 @@ class User_Model extends CI_Model
 	if(md5($userPass) == $store_password)
 	{
 	return 'User Login Successfully';
-	// set user id for session 
+	// set user id for session for accessing routes
 	$this->session->set_userdata('id', $row->id);
 	}
 	else
@@ -35,5 +34,15 @@ class User_Model extends CI_Model
 	{
 	return 'Invalid User Credentials';
 	}
+	}
+	// check admin or not
+	function checkAdminOrNot($id)
+	{
+	$this->db->select('userLevel'); 
+	$this->db->from('users');
+	$this->db->where('id',$id);
+	$query = $this->db->get();
+	$result = $query->result_array();
+	return $result;
 	}
 }
