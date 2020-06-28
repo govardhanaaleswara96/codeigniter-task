@@ -7,7 +7,6 @@ class Admin extends CI_Controller
 	$this->load->database();
     $this->load->model('Book_Model');
     $this->load->model('User_Model');
-    $this->load->library('csvimport');
 }
 	// create Books 
 	public function create(){
@@ -123,6 +122,5 @@ class Admin extends CI_Controller
     
         }
     } 	
-
 }
 ?>
